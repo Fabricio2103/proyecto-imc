@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from funciones import calcular_imc, clasificar_imc, guardar_en_excel
 
+
 # Función para validar entradas
 def validar_entrada(valor):
     return valor.strip() != ""

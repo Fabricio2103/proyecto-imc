@@ -1,5 +1,6 @@
 import openpyxl
 from openpyxl import Workbook
+import datetime 
 
 def calcular_imc(peso, altura):
     """
@@ -33,6 +34,18 @@ def clasificar_imc(imc):
         return "Obesidad"
     else:
         return "Obesidad mórbida"
+def ajustar_imc_por_hora(imc):
+    """
+    Ajusta el IMC según la hora del día.
+    :param imc: Valor del IMC original.
+    :return: IMC ajustado.
+    """
+    hora_actual = datetime.now().hour
+    if 6 <= hora_actual < 12:  # Mañana
+        return imc - 0.5
+    elif 18 <= hora_actual < 24:  # Noche
+        return imc + 0.5
+    return imc  # Tarde o madrugada (sin ajuste)
 
 def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
     """
