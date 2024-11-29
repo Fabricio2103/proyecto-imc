@@ -76,3 +76,20 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         print(f"Datos guardados correctamente en '{archivo}'.")
     except PermissionError:
         raise PermissionError(f"No se pudo guardar el archivo '{archivo}'. Verifica que no esté abierto.")
+
+# Ejemplo de prueba (puedes eliminar esta sección si no necesitas pruebas)
+if __name__ == "__main__":
+    try:
+        ejemplo_datos = {
+            'nombre': 'Juan',
+            'edad': 30,
+            'genero': 'Masculino',
+            'actividad': 'Moderada',
+            'peso': 70,
+            'altura': 175,  # Altura en cm
+            'imc': calcular_imc(70, 1.75),
+            'clasificacion': clasificar_imc(calcular_imc(70, 1.75))
+        }
+        guardar_en_excel(ejemplo_datos)
+    except Exception as e:
+        print(f"Error: {e}")
