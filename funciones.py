@@ -1,3 +1,5 @@
+import openpyxl
+from openpyxl import Workbook
 
 def calcular_imc(peso, altura):
     "Calcula el índice de masa corporal (IMC)."
@@ -20,3 +22,16 @@ def clasificar_imc(imc):
         return "Obesidad"
     else:
         return "Obesidad mórbida"
+
+def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
+    "Guarda los datos en un archivo Excel utilizando openpyxl."
+    try:
+        wb = openpyxl.load_workbook(archivo)
+    except FileNotFoundError:
+        wb = Workbook()
+        sheet = wb.active
+        sheet.append(["Nombre", "Edad", "Genero", "Actividad Física", "Peso", "Altura", "IMC", "Clasificación"])
+
+    sheet = wb.active
+    sheet.append([datos['nombre'], datos['edad'], datos['genero'], datos['actividad'], datos['peso'], datos['altura'], datos['imc'], datos['clasificacion']])
+    wb.save(archivo)
