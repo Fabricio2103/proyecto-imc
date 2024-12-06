@@ -99,11 +99,11 @@ def cargar_imagen(ruta, ancho, alto):
     img = img.resize((ancho, alto), Image.Resampling.LANCZOS)
     return ImageTk.PhotoImage(img)
 
-imagen_inicio = cargar_imagen("imagenes/inicio.png", 500, 200)
-imagen_genero = cargar_imagen("imagenes/genero.png", 500, 200)
-imagen_datos = cargar_imagen("imagenes/datos.png", 500, 200)
-imagen_imc = cargar_imagen("imagenes/imc.png", 500, 200)
-imagen_resumen = cargar_imagen("imagenes/resumen.png", 500, 200)
+imagen_inicio = cargar_imagen("imagenes/1.png", 500, 200)
+imagen_genero = cargar_imagen("imagenes/2.png", 500, 200)
+imagen_datos = cargar_imagen("imagenes/3.png", 500, 200)
+imagen_imc = cargar_imagen("imagenes/4.png", 500, 200)
+imagen_resumen = cargar_imagen("imagenes/5.png", 500, 200)
 
 # Pantallas
 pantalla_inicio = tk.Frame(ventana)
