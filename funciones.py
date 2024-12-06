@@ -1,13 +1,13 @@
 import openpyxl
 from openpyxl import Workbook
-import datetime 
+from datetime import datetime
 
 def calcular_imc(peso, altura):
     """
     Calcula el índice de masa corporal (IMC).
     :param peso: Peso en kilogramos.
     :param altura: Altura en metros.
-    :return: El IMC redondeado a 2 decimales o None si la altura no es válida.
+    :return: El IMC redondeado a 2 decimales o None si es que la altura no es válida.
     """
     if altura <= 0:
         return None  # Retorna None si la altura es inválida
@@ -34,18 +34,22 @@ def clasificar_imc(imc):
         return "Obesidad"
     else:
         return "Obesidad mórbida"
-def ajustar_imc_por_hora(imc):
+
+def generar_recomendacion(clasificacion):
     """
-    Ajusta el IMC según la hora del día.
-    :param imc: Valor del IMC original.
-    :return: IMC ajustado.
+    Genera una recomendación personalizada según la clasificación del IMC.
+    :param clasificacion: Clasificación del IMC.
+    :return: Una recomendación en formato de texto.
     """
-    hora_actual = datetime.now().hour
-    if 6 <= hora_actual < 12:  # Mañana
-        return imc - 0.5
-    elif 18 <= hora_actual < 24:  # Noche
-        return imc + 0.5
-    return imc  # Tarde o madrugada (sin ajuste)
+    recomendaciones = {
+        "Bajo peso": "Recomendaciones: Come con más frecuencia. Empieza poco a poco a hacer de 5 a 6 comidas más pequeñas durante el día, elige alimentos con más nutrientes, toma agua, haz ejercicio.",
+        "Peso normal": "Recomendaciones: Sigue así, mantén tu cuerpo activo y no olvides tomar agua y cuidarte de los azúcares.",
+        "Sobrepeso": "Recomendaciones: Toma entre 6 y 8 vasos de agua al día, cuida las bebidas con azúcar, haz ejercicio diario.",
+        "Obesidad ligera": "Recomendaciones: Reducir las calorías, tomar entre 6 a 8 vasos de agua al día, evitar azúcares y grasas no saludables, hacer deporte o ejercicio.",
+        "Obesidad": "Recomendaciones: Reducir las calorías, tomar entre 6 a 8 vasos de agua al día, evitar azúcares y grasas no saludables, hacer deporte o ejercicio.",
+        "Obesidad mórbida": "Recomendaciones: Consultar con un especialista, reducir las calorías drásticamente, mantenerse hidratado y seguir un plan de ejercicio adaptado."
+    }
+    return recomendaciones.get(clasificacion, "No hay recomendaciones disponibles.")
 
 def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
     """
@@ -79,7 +83,7 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         datos['peso'], 
         datos['altura'], 
         datos['imc'], 
-        datos['clasificacion']
+        datos['clasificacion'], 
     ]
     sheet.append(fila)
     
@@ -89,20 +93,3 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         print(f"Datos guardados correctamente en '{archivo}'.")
     except PermissionError:
         raise PermissionError(f"No se pudo guardar el archivo '{archivo}'. Verifica que no esté abierto.")
-
-# Ejemplo de prueba (puedes eliminar esta sección si no necesitas pruebas)
-if __name__ == "__main__":
-    try:
-        ejemplo_datos = {
-            'nombre': 'Juan',
-            'edad': 30,
-            'genero': 'Masculino',
-            'actividad': 'Moderada',
-            'peso': 70,
-            'altura': 175,  # Altura en cm
-            'imc': calcular_imc(70, 1.75),
-            'clasificacion': clasificar_imc(calcular_imc(70, 1.75))
-        }
-        guardar_en_excel(ejemplo_datos)
-    except Exception as e:
-        print(f"Error: {e}")
