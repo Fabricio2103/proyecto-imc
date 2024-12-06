@@ -94,9 +94,3 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         print(f"Datos guardados correctamente en '{archivo}'.")
     except PermissionError:
         raise PermissionError(f"No se pudo guardar el archivo '{archivo}'. Verifica que no esté abierto.")
-def calcular_imc(peso, altura):
-    """Calcula el índice de masa corporal (IMC)."""
-    if altura <= 0:
-        return None
-    imc = peso / (altura ** 2)
-    return imc
