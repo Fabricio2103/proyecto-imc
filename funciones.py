@@ -65,11 +65,11 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         # Si no existe, crea un nuevo archivo y agrega encabezados
         wb = Workbook()
         sheet = wb.active
-        encabezados = ["Nombre", "Edad", "Género", "Actividad Física", "Peso (kg)", "Altura (cm)", "IMC", "Clasificación", "Recomendación"]
+        encabezados = ["Nombre", "Edad", "Género", "Actividad Física", "Peso (kg)", "Altura (cm)", "IMC", "Clasificación"]
         sheet.append(encabezados)
     
     # Validar que los datos tengan las claves necesarias
-    campos_requeridos = ["nombre", "edad", "genero", "actividad", "peso", "altura", "imc", "clasificacion", "recomendacion"]
+    campos_requeridos = ["nombre", "edad", "genero", "actividad", "peso", "altura", "imc", "clasificacion"]
     for campo in campos_requeridos:
         if campo not in datos:
             raise ValueError(f"Falta el campo requerido: {campo}")
@@ -84,7 +84,6 @@ def guardar_en_excel(datos, archivo='resultados_imc.xlsx'):
         datos['altura'], 
         datos['imc'], 
         datos['clasificacion'], 
-        datos['recomendacion']
     ]
     sheet.append(fila)
     
