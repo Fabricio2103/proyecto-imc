@@ -7,7 +7,7 @@ def calcular_imc(peso, altura):
     Calcula el índice de masa corporal (IMC).
     :param peso: Peso en kilogramos.
     :param altura: Altura en metros.
-    :return: El IMC redondeado a 2 decimales o None si la altura no es válida.
+    :return: El IMC redondeado a 2 decimales o None si es que la altura no es válida.
     """
     if altura <= 0:
         return None  # Retorna None si la altura es inválida
